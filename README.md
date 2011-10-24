@@ -25,6 +25,7 @@ RGridViewAction
 RGridViewAction store the ordered models.
 
 To use RGridViewAction add it in your controller:
+
 ~~~
 [php]
 public function actions()
