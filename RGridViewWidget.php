@@ -99,8 +99,8 @@ class RGridViewWidget extends CGridView
 	 */
 	public function init()
 	{
-		Y::script()->registerCoreScript('jquery.ui');
-		Y::script()->registerScript(__CLASS__, '$( "#'.$this->getId().'" ).sortable({ items: "tr.rgridviewwidget" });');
+		Yii::app()->clientScript->registerCoreScript('jquery.ui');
+		Yii::app()->clientScript->registerScript(__CLASS__, '$( "#'.$this->getId().'" ).sortable({ items: "tr.rgridviewwidget" });');
 		parent::init();
 		
 		$this->pager = null;
