@@ -1,0 +1,7 @@
+0.2
+---
+[*] Add jQuery sortable options (Slava Rudnev)
+
+0.1
+---
+[+] Initial public release. (Slava Rudnev)

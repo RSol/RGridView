@@ -13,12 +13,23 @@ $this->widget('ext.RGridViewWidget.RGridViewWidget', array(
     'successOrderMessage'=>'Success',
     'buttonLabel'=>'Order',
     'template' => '{summary} {items} {order}',
+	'options'=>array(
+		'cursor' => 'crosshair',
+	),
     'columns'=>array(
         ...
     ),
 ));
 ~~~
 
+ќпции:
+
+* rowCssId - строка - PHP-выражение, которое будет использоватьс€ дл€ преобразовани€ в id элемента. ¬ выражении могут использоватьс€  переменные $row - номер строки (начинаетс€ с нул€); $data - запись (модель), используема€ дл€ отображени€ строки; $this - объект строки
+* orderUrl - строка или массив, используемые дл€ формировани€ URL.
+* successOrderMessage - строка - сообщение о успешном сохранении.
+* buttonLabel - строка - надпись дл€ ajax кнопки
+* template - строка - шаблон, который будет использоватьс€ дл€ формировани€ виджета. ћогут быть использованы: {summary}, {items} and {order}. Ёти идиомы будут заменены на общий текст, таблицу, и ajax-кнопка (не используетс€ рейджинг).
+* options - массив - опции дл€ инициализации jQuery sortable плагина.
 
 RGridViewAction
 ===============

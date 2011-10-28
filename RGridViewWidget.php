@@ -23,6 +23,9 @@ Yii::import('zii.widgets.grid.CGridView');
  *     'successOrderMessage'=>'Success',
  *     'buttonLabel'=>'Order',
  *     'template' => '{summary} {items} {order}',
+ *     'options'=>array(
+ *          'cursor' => 'crosshair',
+ *      ),
  *     'columns'=>array(
  *         ...
  *     ),
@@ -32,39 +35,43 @@ Yii::import('zii.widgets.grid.CGridView');
  * Additional 
  * 
  * @author Slava Rudnev <slava.rudnev@gmail.com>
- * @version 0.1
+ * @version 0.2
  */
 
 class RGridViewWidget extends CGridView
 {
 	/**
-	 * a PHP expression that will be evaluated for every data row and whose result will be rendered as the css id of the data row. In this expression, the variable $row the row number (zero-based); $data the data model for the row; and $this the column object
-	 * @var string
+	 * @var string a PHP expression that will be evaluated for every data row and whose result will be rendered as the css id of the data row. In this expression, the variable $row the row number (zero-based); $data the data model for the row; and $this the column object
 	 */
 	public $rowCssId = '$data->id';
 	
 	/**
-	 * a URL or an action route that can be used to create a URL. See {@see normalizeUrl} for more details about how to specify this parameter.
-	 * @var mixed 
+	 * @var mixed a URL or an action route that can be used to create a URL.
+	 *  See {@see normalizeUrl} for more details about how to specify this parameter.
 	 */
 	public $orderUrl = array('order');
 
 	/**
-	 * After successfully order message
-	 * @var string 
+	 * @var string After successfully order message
 	 */
 	public $successOrderMessage = 'Models succesfuly ordered';
 	
 	/**
-	 * Label for ajax button
-	 * @var string 
+	 * @var string Label for ajax button
 	 */
 	public $buttonLabel = 'Order';
 
 	/**
-	 * the template to be used to control the layout of various sections in the view. These tokens are recognized: {summary}, {items} and {order}. They will be replaced with the summary text, the items, and the order ajax button (pager not used).
+	 * @var string the template to be used to control the layout of various sections in the view.
+	 *  These tokens are recognized: {summary}, {items} and {order}.
+	 *  They will be replaced with the summary text, the items, and the order ajax button (pager not used).
 	 */
 	public $template = '{summary} {items} {order}';
+	
+	/**
+	 * @var array the initial JavaScript options that should be passed to the JUI plugin. 
+	 */
+	public $options = array();
 
 	/**
 	 * Renders a table body row.
@@ -99,8 +106,14 @@ class RGridViewWidget extends CGridView
 	 */
 	public function init()
 	{
+		$options = array('items'=>'tr.rgridviewwidget');
+		if(is_array($this->options))
+		{
+			$options = array_merge($this->options, $options);
+		}
+		
 		Yii::app()->clientScript->registerCoreScript('jquery.ui');
-		Yii::app()->clientScript->registerScript(__CLASS__, '$( "#'.$this->getId().'" ).sortable({ items: "tr.rgridviewwidget" });');
+		Yii::app()->clientScript->registerScript(__CLASS__, '$( "#'.$this->getId().'" ).sortable('.CJavaScript::encode($options).');');
 		parent::init();
 		
 		$this->pager = null;
