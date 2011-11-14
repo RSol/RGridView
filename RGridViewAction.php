@@ -52,8 +52,8 @@ class RGridViewAction extends CAction
 				Y::command()
 					->update($orderModel->tableName(), array(
 						$this->orderField =>$order,
-					), 'range_id=:range_id', array(
-						$orderModel->getMetaData()->tableSchema->primaryKey => $id,
+					), $orderModel->getMetaData()->tableSchema->primaryKey.'=:range_id', array(
+						':range_id' => $id,
 					));
 			}
 			
