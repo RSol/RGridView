@@ -49,7 +49,7 @@ class RGridViewAction extends CAction
 
 			foreach($models as $order => $id)
 			{
-				Y::command()
+				Yii::app()->createCommand()
 					->update($orderModel->tableName(), array(
 						$this->orderField =>$order,
 					), $orderModel->getMetaData()->tableSchema->primaryKey.'=:range_id', array(
